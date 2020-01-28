@@ -6,7 +6,7 @@ set more off, perm
 
 
 * Set base folder and paths
-gl base 	"~/Downloads/empirical replication files/labor market data prep"  //Change this to the folder where you downloaded the files to
+gl base 	"D:\project\empirical replication files\labor market data prep"  //Change this to the precise folder where the current file is located
 gl inputdata "${base}/data files"
 gl cleandata "${base}/clean data"
 

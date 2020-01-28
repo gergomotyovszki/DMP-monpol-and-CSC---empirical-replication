@@ -7,11 +7,11 @@
     clc
     
     % Loading IRIS Toolbox -- only needed if has not been loaded yet in the current Matlab session
-%         currentfolder = fileparts(which('SA_labor_iris.m'));
-%         irisfolder = [currentfolder '\IRIS_Tbx_20150127'];
-%         addpath(genpath(irisfolder));
-% 
-%         irisstartup
+        currentfolder = fileparts(which('SA_labor_iris.m'));
+        irisfolder = [currentfolder '\IRIS_Tbx_20150127'];
+        addpath(genpath(irisfolder));
+
+        irisstartup
     
         irisrequired('20150127');
     
@@ -88,5 +88,7 @@
     dbsave(SA,'clean data\SA_data_iris.csv','class=', false, 'comment=', false, 'format=','%0.8f');
     dbsave(NA,'clean data\NA_data.csv','class=', false, 'comment=', false, 'format=','%0.8f');
 
-
+    % Remove IRIS from the Matlab path
+    rmpath(genpath(irisfolder));
+    irisfinish;
     
