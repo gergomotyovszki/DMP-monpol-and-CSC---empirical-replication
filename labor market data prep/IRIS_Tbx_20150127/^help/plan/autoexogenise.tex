@@ -1,0 +1,47 @@
+
+
+    \filetitle{autoexogenise}{Exogenise variables and automatically endogenise corresponding shocks}{plan/autoexogenise}
+
+	\paragraph{Syntax}
+
+\begin{verbatim}
+P = autoexogenise(P,List,Dates)
+P = autoexogenise(P,List,Dates,Sigma)
+\end{verbatim}
+
+\paragraph{Input arguments}
+
+\begin{itemize}
+\item
+  \texttt{P} {[} plan {]} - Simulation plan.
+\item
+  \texttt{List} {[} cellstr \textbar{} char \textbar{} \texttt{@all} {]}
+  - List of variables that will be exogenised; these variables must have
+  their corresponding shocks assigned, see
+  \href{modellang/autoexogenise}{\texttt{!autoexogenise}}; \texttt{@all}
+  means all autoexogenised variables defined in the model object will be
+  exogenised.
+\item
+  \texttt{Dates} {[} numeric {]} - Dates at which the variables will be
+  exogenised.
+\item
+  \texttt{Sigma} {[} \texttt{1} \textbar{} \texttt{1i} \textbar{}
+  numeric {]} - Anticipation mode (real or imaginary) for endogenized
+  shocks, and their numerical weight (used in underdetermined simulation
+  plans); if omitted, \texttt{Sigma = 1}.
+\end{itemize}
+
+\paragraph{Output arguments}
+
+\begin{itemize}
+\itemsep1pt\parskip0pt\parsep0pt
+\item
+  \texttt{P} {[} plan {]} - Simulation plan with new information on
+  exogenised variables and endogenised shocks included.
+\end{itemize}
+
+\paragraph{Description}
+
+\paragraph{Example}
+
+

@@ -1,0 +1,42 @@
+
+
+    \filetitle{freq}{Date frequency of tseries object}{tseries/freq}
+
+	\paragraph{Syntax}
+
+\begin{verbatim}
+F = freq(X)
+\end{verbatim}
+
+\paragraph{Input arguments}
+
+\begin{itemize}
+\itemsep1pt\parskip0pt\parsep0pt
+\item
+  \texttt{X} {[} tseries {]} - Input tseries object.
+\end{itemize}
+
+\paragraph{Output arguments}
+
+\begin{itemize}
+\itemsep1pt\parskip0pt\parsep0pt
+\item
+  \texttt{F} {[} \texttt{0} \textbar{} \texttt{1} \textbar{} \texttt{2}
+  \textbar{} \texttt{4} \textbar{} \texttt{6} \textbar{} \texttt{12}
+  \textbar{} \texttt{52} \textbar{} \texttt{365} {]} - Date frequency of
+  observations in the input tseries object; \texttt{F} is the number of
+  periods within a year.
+\end{itemize}
+
+\paragraph{Description}
+
+The \texttt{freq( )} function is equivalent to calling the
+\texttt{get( )} function:
+
+\begin{verbatim}
+get(x,'freq')
+\end{verbatim}
+
+\paragraph{Example}
+
+

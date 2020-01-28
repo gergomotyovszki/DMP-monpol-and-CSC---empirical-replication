@@ -1,0 +1,75 @@
+
+
+    \filetitle{rpteq}{New reporting equations (rpteq) object}{rpteq/rpteq}
+
+	\paragraph{Syntax}
+
+\begin{verbatim}
+Q = rpteq(FName)
+Q = rpteq(Eqtn)
+\end{verbatim}
+
+\paragraph{Input arguments}
+
+\begin{itemize}
+\item
+  \texttt{FName} {[} char \textbar{} cellstr {]} - File name or cellstr
+  array of file names, each a plain text file with reporting equations;
+  multiple input files will be combined together.
+\item
+  \texttt{Eqtn} {[} char \textbar{} cellstr {]} - Equation or cellstr
+  array of equations.
+\end{itemize}
+
+\paragraph{Output arguments}
+
+\begin{itemize}
+\itemsep1pt\parskip0pt\parsep0pt
+\item
+  \texttt{Q} {[} rpteq {]} - New reporting equations object.
+\end{itemize}
+
+\paragraph{Description}
+
+Reporting equations must be written in the following form:
+
+\begin{verbatim}
+`LhsName = RhsExpr;`
+`"Label" LhsName = RhsExpr;`
+\end{verbatim}
+
+where
+
+\begin{itemize}
+\item
+  \texttt{LhsName} is the name of a left-hand-side variable (with no lag
+  or lead);
+\item
+  \texttt{RhsExpr} is an expression on the right-hand side that will be
+  evaluated period by period, and assigned to the left-hand-side
+  variable, \texttt{LhsName}.
+\item
+  \texttt{"Label"} is an optional label that will be used to create a
+  comment in the output time series for the respective left-hand-side
+  variable.
+\item
+  the equation must end with a semicolon.
+\end{itemize}
+
+\paragraph{Example}
+
+\begin{verbatim}
+q = rpteq({ ...
+    'a = c * a{-1}^0.8 * b{-1}^0.2;', ...
+    'b = sqrt(b{-1});', ...
+    })
+
+q =
+    rpteq object
+    number of equations: [2]
+    comment: ''
+    user data: empty
+    export files: [0]
+\end{verbatim}
+
+

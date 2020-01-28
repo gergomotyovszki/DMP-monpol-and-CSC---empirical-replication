@@ -1,0 +1,107 @@
+
+
+    \filetitle{run}{Evaluate reporting equations (rpteq) object}{rpteq/run}
+
+	\paragraph{Syntax}
+
+\begin{verbatim}
+Outp = run(Q,Inp,Range,...)
+\end{verbatim}
+
+\paragraph{Input arguments}
+
+\begin{itemize}
+\item
+  \texttt{Q} {[} char {]} - Reporting equations (rpteq) object.
+\item
+  \texttt{Inp} {[} struct {]} - Input database that will be used to
+  evaluate the reporting equations.
+\item
+  \texttt{Dates} {[} numeric {]} - Dates at which the reporting
+  equations will be evaluated; \texttt{Dates} does not need to be a
+  continuous date range.
+\end{itemize}
+
+\paragraph{Output arguments}
+
+\begin{itemize}
+\itemsep1pt\parskip0pt\parsep0pt
+\item
+  \texttt{Outp} {[} struct {]} - Output database with reporting
+  variables.
+\end{itemize}
+
+\paragraph{Options}
+
+\begin{itemize}
+\item
+  \texttt{'dbOverlay='} {[} \texttt{true} \textbar{}
+  \emph{\texttt{false}} \textbar{} struct {]} - If \texttt{true}, the
+  LHS output data will be combined with data from the input database (or
+  a user-supplied database).
+\item
+  \texttt{'fresh='} {[} \texttt{true} \textbar{} \emph{\texttt{false}}
+  {]} - If \texttt{true}, only LHS variables will be included in the
+  output database, \texttt{Outp}; if \texttt{false} the output database
+  will also include all entries from the input database, \texttt{Inp}.
+\end{itemize}
+
+\paragraph{Description}
+
+Reporting equations are always evaluated non-simultaneously,
+i.e.~equation by equation, for each period.
+
+\paragraph{Example}
+
+Note the differences in the three output databases, \texttt{d1},
+\texttt{d2}, \texttt{d3}, depending on the options \texttt{'dbOverlay='}
+and \texttt{'fresh='}.
+
+\begin{verbatim}
+>> q = rpteq({ ...
+    'a = c * a{-1}^0.8 * b{-1}^0.2;', ...
+    'b = sqrt(b{-1});', ...
+    })
+
+q =
+    rpteq object
+    number of equations: [2]
+    comment: ''
+    user data: empty
+    export files: [0]
+
+>> d = struct();
+>> d.a = tseries();
+>> d.b = tseries();
+>> d.a(qq(2009,4)) = 0.76;
+>> d.b(qq(2009,4)) = 0.88;
+>> d.c = 10;
+>> d
+
+d = 
+    a: [1x1 tseries]
+    b: [1x1 tseries]
+    c: 10
+
+>> d1 = run(q,d,qq(2010,1):qq(2011,4))
+
+d1 = 
+    a: [8x1 tseries]
+    b: [8x1 tseries]
+    c: 10
+
+>> d2 = run(q,d,qq(2010,1):qq(2011,4),'dbOverlay=',true)
+
+d2 = 
+    a: [9x1 tseries]
+    b: [9x1 tseries]
+    c: 10
+
+>> d3 = run(q,d,qq(2010,1):qq(2011,4),'fresh=',true)
+
+d3 = 
+    a: [8x1 tseries]
+    b: [8x1 tseries]
+\end{verbatim}
+
+

@@ -1,0 +1,3 @@
+Download CPS data into this subfolder for years 1979-2016 from http://data.nber.org/morg/annual/
+
+morgYY.dta files

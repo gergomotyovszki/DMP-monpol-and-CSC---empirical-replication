@@ -1,0 +1,56 @@
+
+
+    \filetitle{xasymptote}{Set or get asymptotic assumptions for exogenous inputs}{VAR/xasymptote}
+
+	\paragraph{Syntax}
+
+\begin{verbatim}
+V = xasymptote(V,X0)
+X = xasymptote(V)
+\end{verbatim}
+
+\paragraph{Input arguments}
+
+\begin{itemize}
+\item
+  \texttt{V} {[} VAR {]} - VAR object.
+\item
+  \texttt{X0} {[} numeric {]} - A Nx-NGrp-by-NAlt vector or matrix of
+  asymptotic assumptions for exogenous inputs, where Nx is the number of
+  exogenous variables, NGrp is the number of groups in panel VARs, and
+  NAlt is the number of alternative parameterizations.
+\end{itemize}
+
+\paragraph{Output arguments}
+
+\begin{itemize}
+\itemsep1pt\parskip0pt\parsep0pt
+\item
+  \texttt{V} {[} VAR {]} - VAR object.
+\end{itemize}
+
+\paragraph{Description}
+
+The asymptotic assumptions for exogenous inputs are used in the
+following contexts:
+
+\begin{itemize}
+\item
+  to compute the asymptotic mean of the VAR process,
+  \href{VAR/mean}{\texttt{mean}};
+\item
+  to set up initical conditions for resampling,
+  \href{VAR/resample}{\texttt{resample}}, when they are not supplied in
+  the input database.
+\end{itemize}
+
+If any of the three dimensions of the vector/matrix \texttt{X0} is size
+1, it will be automatically expanded to its appropriate size.
+
+The asymptotic assumptions are reset to \texttt{NaN} each time the VAR
+object is estimated using the function
+\href{VAR/estimate}{\texttt{estimate}}.
+
+\paragraph{Example}
+
+

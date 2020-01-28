@@ -1,0 +1,129 @@
+
+
+    \filetitle{band}{Line-and-band graph for tseries objects}{tseries/band}
+
+	\paragraph{Syntax}
+
+\begin{verbatim}
+[Ln,Bd,Range] = band(X,Low,High...)
+[Ln,Bd,Range] = band(Range,X,Low,High,...)
+[Ln,Bd,Range] = band(Ax,Range,X,Low,High,...)
+\end{verbatim}
+
+\paragraph{Input arguments}
+
+\begin{itemize}
+\item
+  \texttt{Ax} {[} numeric {]} - Handle to axes in which the graph will
+  be plotted; if not specified, the current axes will used.
+\item
+  \texttt{Range} {[} numeric {]} - Date range; if not specified the
+  entire range of the input time series object will be plotted.
+\item
+  \texttt{X} {[} tseries {]} - Input time series whose columns will be
+  ploted as a line graph (referred to as center lines).
+\item
+  \texttt{Low} {[} tseries {]} - Time series that defines the lower edge
+  of each band.
+\item
+  \texttt{High} {[} tseries {]} - Time series that defines the upper
+  edge of each band plotted.
+\end{itemize}
+
+\paragraph{Output arguments}
+
+\begin{itemize}
+\item
+  \texttt{Ln} {[} numeric {]} - Handles to lines plotted.
+\item
+  \texttt{Bd} {[} numeric {]} - Handles to bands (patch objects)
+  plotted.
+\item
+  \texttt{Range} {[} numeric {]} - Date range actually plotted.
+\end{itemize}
+
+\paragraph{Options}
+
+\begin{itemize}
+\item
+  \texttt{'datePosition='} {[} \emph{\texttt{'centre'}} \textbar{}
+  \texttt{'end'} \textbar{} \texttt{'start'} {]} - Position of each date
+  point within a given period span.
+\item
+  \texttt{'dateTick='} {[} numeric \textbar{} \emph{\texttt{Inf}} {]} -
+  Vector of dates locating tick marks on the X-axis; Inf means they will
+  be created automatically.
+\item
+  \texttt{'excludeFromLegend='} {[} \texttt{*true*} \textbar{}
+  \texttt{false} {]} - Excluce bands from legend.
+\item
+  \texttt{'grid='} {[} \texttt{'bottom'} \textbar{}
+  \emph{\texttt{'top'}} {]} - Place grid on top or bottom.
+\item
+  \texttt{'relative='} {[} \emph{\texttt{true}} \textbar{}
+  \texttt{false} {]} - If \texttt{true}, the lower and upper edge will
+  be constructed by subtracting \texttt{Low} from \texttt{X} and adding
+  \texttt{High} to \texttt{X}, respectively; otherwise, \texttt{Low} and
+  \texttt{High} will be interpreted as absolute positions of the edges.
+\item
+  \texttt{'tight='} {[} \texttt{true} \textbar{} \emph{\texttt{false}}
+  {]} - Make the y-axis tight.
+\item
+  \texttt{'white='} {[} numeric \textbar{} \emph{\texttt{0.85}} {]} -
+  Percentage of white color mixed with the respective center line color
+  and used to fill the band area.
+\end{itemize}
+
+See help on built-in \texttt{plot} function for other options available.
+
+\paragraph{Date format options}
+
+See \href{dates/dat2str}{\texttt{dat2str}} for details on date format
+options.
+
+\begin{itemize}
+\item
+  \texttt{'dateFormat='} {[} char \textbar{} cellstr \textbar{}
+  \emph{\texttt{'YYYYFP'}} {]} - Date format string, or array of format
+  strings (possibly different for each date).
+\item
+  \texttt{'freqLetters='} {[} char \textbar{} \emph{\texttt{'YHQBMW'}}
+  {]} - Six letters used to represent the six possible frequencies of
+  IRIS dates, in this order: yearly, half-yearly, quarterly, bi-monthly,
+  monthly, and weekly (such as the \texttt{'Q'} in \texttt{'2010Q1'}).
+\item
+  \texttt{'months='} {[} cellstr \textbar{}
+  \emph{\texttt{\{'January',...,'December'\}}} {]} - Twelve strings
+  representing the names of the twelve months.
+\item
+  \texttt{'standinMonth='} {[} numeric \textbar{} \texttt{'last'}
+  \textbar{} \emph{\texttt{1}} {]} - Month that will represent a
+  lower-than-monthly-frequency date if the month is part of the date
+  format string.
+\end{itemize}
+
+\paragraph{Description}
+
+If one (or more) of the input time series, \texttt{X}, \texttt{Low}, or
+\texttt{High}, consists of more than one column, the graph is
+constructructed as follows:
+
+\begin{itemize}
+\item
+  One column in \texttt{X}, multiple columns in \texttt{Low} or
+  \texttt{High} - multiple bands are plotted around a single center
+  line.
+\item
+  Multiple columns in \texttt{X}, one column in \texttt{Low} or
+  \texttt{High} - a single band is plotted around each of the center
+  lines, each band constructed from the same lower and upper edge data;
+  this setup makes sense only with the option \texttt{'relative=' true}.
+\item
+  Multiple columns in \texttt{X}, mutliple columns in \texttt{Low} or
+  \texttt{High} - a single band is plotted around each of the center
+  lines, each band constructed from different data.
+\end{itemize}
+
+\paragraph{Example}
+
+

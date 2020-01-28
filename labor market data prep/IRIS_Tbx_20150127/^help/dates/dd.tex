@@ -1,0 +1,49 @@
+
+
+    \filetitle{dd}{Matlab serial date numbers that can be used to construct daily tseries objects}{dates/dd}
+
+	\paragraph{Syntax}
+
+\begin{verbatim}
+Dat = dd(Year,Month,Day)
+Dat = dd(Year,Month,'end')
+Dat = dd(Year,Month)
+Dat = dd(Year)
+\end{verbatim}
+
+\paragraph{Output arguments}
+
+\begin{itemize}
+\itemsep1pt\parskip0pt\parsep0pt
+\item
+  \texttt{Dat} {[} numeric {]} - IRIS serial date numbers.
+\end{itemize}
+
+\paragraph{Input arguments}
+
+\begin{itemize}
+\item
+  \texttt{Year} {[} numeric {]} - Year.
+\item
+  \texttt{Month} {[} numeric {]} - Calendar month in year; if missing,
+  \texttt{Month} is \texttt{1} by default.
+\item
+  \texttt{Day} {[} numeric {]} - Calendar day in month; if missing,
+  \texttt{Day} is \texttt{1} by default; \texttt{'end'} means the end
+  day of the respective month.
+\end{itemize}
+
+\paragraph{Description}
+
+\paragraph{Example}
+
+\begin{verbatim}
+>> d = dd(2010,12,3)
+d =
+      734475
+>> dat2str(d)
+ans =  
+    '2010-Dec-03'
+\end{verbatim}
+
+

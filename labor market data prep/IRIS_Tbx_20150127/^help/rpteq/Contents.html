@@ -1,0 +1,149 @@
+<html>
+<head>
+<style type='text/css'>
+body {
+   background-color: white;
+   margin: 1em 2em 1em 2em;
+   font-family: Sans-Serif;
+   color: #002;
+   line-height: 140%;
+   font-size: 12px;
+}
+
+h1 {
+    font-size: 140%;
+}
+
+h2 {
+    font-size: 130%;
+}
+
+h3 {
+    font-size: 120%;
+}
+
+h4 {
+    font-size: 100%;
+    font-style: normal;
+    font-weight: bold;
+}
+
+h5 {
+    font-size: 100%;
+    font-style: italic;
+    font-weight: normal;
+}
+
+pre {
+   background-color: #eee;
+   padding: 0.5em 0.5em 0.5em 2em;
+}
+
+@media print {
+   pre {word-wrap:break-word; width:100%;}
+} 
+
+ul li,
+ol li {
+   padding-left: 0.3em;
+   /*text-indent: -2em;*/
+   margin-bottom: 0.5em;
+}
+
+em {
+   font-style: normal;
+   font-weight: bold;
+   text-decoration: underline;
+   color: #c40;
+}
+
+code {
+   font-family: Monospace;
+   font-size: 100%;
+   color: #c40;
+}
+
+a, a * {
+   text-decoration: underline;
+   color: blue;
+   /* border: 0.5px solid #aaa;
+   white-space: nowrap;
+   padding-right: 0.1em;
+   padding-left: 0.1em;
+   padding-bottom: -5px; */
+}
+
+a code {
+   color: blue;
+}
+
+img {
+   position: relative;
+   bottom: -4px;
+}
+
+div.headline {
+   font-weight: bold;
+   font-size: 110%;
+}
+
+div.copyright {
+   margin-top: 1em;
+   border-top: 1px solid black;
+   padding-top: 0.5em;
+}
+
+div.iris_headline {
+   border-bottom: 1px solid black;
+   padding-bottom: 0.3em;
+}
+
+.LaTeX {
+   font-family: Monospace;
+   font-size: 100%;
+   border: 1px solid #060;
+   color: #060;
+}
+
+code.LaTeX {
+   background-color: white;
+   padding: 0.5em 0.5em 0.5em 2em;
+}
+</style>
+</head>
+
+<body>
+<div class="iris_headline">IRIS Toolbox Reference Manual</div>
+
+
+
+<h1 id="rpteq/Contents">Reporting Equations (rpteq Objects)</h1>
+
+
+<p>Reporting equations (rpteq) objects are systems of equations evaluated successively (i.e. not simultaneously) equation by equation, period by period.</p>
+<p>There are three basic ways to create reporting equations objects:</p>
+<ul>
+<li><p>in the <a href="../modellang/reportingequations.html"><code>!reporting_equations</code></a> section of a model file;</p></li>
+<li><p>in a separate reporting equations file;</p></li>
+<li><p>on the fly within an m-file or in the command window.</p></li>
+</ul>
+<p>Rpteq methods:</p>
+<h4 id="constructor">Constructor</h4>
+<ul>
+<li><a href="../rpteq/rpteq.html"><code>rpteq</code></a> - New reporting equations (rpteq) object.</li>
+</ul>
+<h4 id="evaluating-reporting-equations">Evaluating reporting equations</h4>
+<ul>
+<li><a href="../rpteq/run.html"><code>run</code></a> - Evaluate reporting equations (rpteq) object.</li>
+</ul>
+<h4 id="evaluating-reporting-equations-from-within-model-object">Evaluating reporting equations from within model object</h4>
+<ul>
+<li><a href="../model/reporting.html"><code>reporting</code></a> - Evaluate reporting equations from within model object.</li>
+</ul>
+<h4 id="getting-on-line-help-on-rpteq-functions">Getting on-line help on rpteq functions</h4>
+<pre><code>help rpteq
+help rpteq/function_name</code></pre>
+
+</body>
+<div class="copyright">IRIS Toolbox. Copyright &copy; 2007-2015 IRIS Solutions Team.</div>
+</html>

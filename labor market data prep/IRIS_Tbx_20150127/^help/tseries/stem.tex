@@ -1,0 +1,47 @@
+
+
+    \filetitle{stem}{Plot tseries as discrete sequence data}{tseries/stem}
+
+	\paragraph{Syntax}
+
+\begin{verbatim}
+[H,Range] = stem(X,...)
+[H,Range] = stem(Range,X,...)
+[H,Range] = stem(Ax,Range,X,...)
+\end{verbatim}
+
+\paragraph{Input arguments}
+
+\begin{itemize}
+\item
+  \texttt{Ax} {[} handle \textbar{} numeric {]} - Handle to axes in
+  which the graph will be plotted; if not specified, the current axes
+  will used.
+\item
+  \texttt{Range} {[} numeric {]} - Date range; if not specified the
+  entire range of the input tseries object will be plotted.
+\item
+  \texttt{X} {[} tseries {]} - Input tseries object whose columns will
+  be ploted as a stem graph.
+\end{itemize}
+
+\paragraph{Output arguments}
+
+\begin{itemize}
+\item
+  \texttt{H} {[} handle \textbar{} numeric {]} - Handles to stems
+  plotted.
+\item
+  \texttt{Range} {[} numeric {]} - Actually plotted date range.
+\end{itemize}
+
+\paragraph{Options}
+
+See help on \href{tseries/plot}{\texttt{tseries/plot}} and the built-in
+function \texttt{stem} for all options available.
+
+\paragraph{Description}
+
+\paragraph{Example}
+
+

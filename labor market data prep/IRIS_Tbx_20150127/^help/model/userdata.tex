@@ -1,0 +1,46 @@
+
+
+    \filetitle{userdata}{Get or set user data in an IRIS object}{model/userdata}
+
+	\paragraph{Syntax for getting user
+data}
+
+\begin{verbatim}
+X = userdata(Obj)
+\end{verbatim}
+
+\paragraph{Syntax for assigning user
+data}
+
+\begin{verbatim}
+OBJ = userdata(Obj,X)
+\end{verbatim}
+
+\paragraph{Input arguments}
+
+\begin{itemize}
+\item
+  \texttt{Obj} {[} model \textbar{} tseries \textbar{} VAR \textbar{}
+  SVAR \textbar{} FAVAR {]} - One of the IRIS objects with access to
+  user data functions.
+\item
+  \texttt{X} {[} \ldots{} {]} - Any kind of data that will be attached
+  to, and stored within, the object \texttt{OBJ}.
+\end{itemize}
+
+\paragraph{Output arguments}
+
+\begin{itemize}
+\item
+  \texttt{X} {[} \ldots{} {]} - User data that are currently attached to
+  the object.
+\item
+  \texttt{Obj} {[} model \textbar{} tseries \textbar{} VAR \textbar{}
+  SVAR \textbar{} FAVAR {]} - The object with its user data updated.
+\end{itemize}
+
+\paragraph{Description}
+
+\paragraph{Example}
+
+

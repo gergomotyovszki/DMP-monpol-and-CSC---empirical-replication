@@ -1,0 +1,52 @@
+
+
+    \filetitle{isstationary}{True if model or specified combination of variables is stationary}{model/isstationary}
+
+	\paragraph{Syntax}
+
+\begin{verbatim}
+Flag = isstationary(M)
+Flag = isstationary(M,TName)
+Flag = isstationary(M,TLinComb)
+\end{verbatim}
+
+\paragraph{Input arguments}
+
+\begin{itemize}
+\item
+  \texttt{M} {[} model {]} - Model object.
+\item
+  \texttt{TName} {[} char {]} - Name of a transition variable.
+\item
+  \texttt{Expn} {[} char {]} - Text string defining a linear combination
+  of transition variables; log variables need to be enclosed in
+  \texttt{log(...)}.
+\end{itemize}
+
+\paragraph{Output arguments}
+
+\begin{itemize}
+\itemsep1pt\parskip0pt\parsep0pt
+\item
+  \texttt{Flag} {[} \texttt{true} \textbar{} \texttt{false} {]} - True
+  if the model (if called without a second input argument) or the
+  specified transition variable or combination of transition variables
+  (if called with a second input argument) is stationary.
+\end{itemize}
+
+\paragraph{Description}
+
+\paragraph{Example}
+
+In the following examples, \texttt{m} is a solved model object with two
+of its transition variables named \texttt{X} and \texttt{Y}; the latter
+is a log variable:
+
+\begin{verbatim}
+isstationary(m)
+isstationary(m,'X')
+isstationary(m,'log(Y)')
+isstationary(m,'X - 0.5*log(Y)')
+\end{verbatim}
+
+

@@ -1,0 +1,43 @@
+
+
+    \filetitle{t}{Create function proportional to log of Student T distribution}{logdist/t}
+
+	\paragraph{Syntax}
+
+\begin{verbatim}
+F = logdist.t(Mean,Std,Df)
+\end{verbatim}
+
+\paragraph{Input arguments}
+
+\begin{itemize}
+\item
+  \texttt{Mean} {[} numeric {]} - Mean of the normal distribution.
+\item
+  \texttt{Std} {[} numeric {]} - Std dev of the normal distribution.
+\item
+  \texttt{Df} {[} integer {]} - Number of degrees of freedom. If finite,
+  the distribution is Student T; if omitted or \texttt{Inf} (default)
+  the distribution is Normal.
+\end{itemize}
+
+Multivariate cases are supported. Evaluating multiple vectors as an
+array of column vectors is supported.
+
+\paragraph{Output arguments}
+
+\begin{itemize}
+\itemsep1pt\parskip0pt\parsep0pt
+\item
+  \texttt{F} {[} function\_handle {]} - Function handle returning a
+  value proportional to the log of Normal or Student density.
+\end{itemize}
+
+\paragraph{Description}
+
+See \href{logdist/Contents}{help on the logdisk package} for details on
+using the function handle \texttt{F}.
+
+\paragraph{Example}
+
+

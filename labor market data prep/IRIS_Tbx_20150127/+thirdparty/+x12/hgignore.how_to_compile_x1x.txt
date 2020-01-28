@@ -1,0 +1,18 @@
+How to compile X1x
+===================
+
+* Install gfortran http://hpc.sourceforge.net/
+
+* Install XCode
+
+* In XCode Preferences, enable Command Tools
+
+* Download X1x source code archive, unzip in a temporary directory
+
+* In Makefile, set LINKER and FC both to gfortran
+
+* Run make --makefile=Makefile to build an executable
+
+* Use otool -L filename to identify dependencies of the executable on other dylibs located in /usr/local/lib
+
+* Use install_name_tool -change old_path new_path to change the path to dylibs so that they can be redistributed within the same directory as the executable

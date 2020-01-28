@@ -1,0 +1,66 @@
+
+
+    \filetitle{arma}{Apply ARMA model to input series}{tseries/arma}
+
+	\paragraph{Syntax}
+
+\begin{verbatim}
+X = arma(E,Ar,Ma)
+X = arma(E,Ar,Ma,Range)
+\end{verbatim}
+
+\paragraph{Input arguments}
+
+\begin{itemize}
+\item
+  \texttt{E} {[} tseries {]} - Input time series that will be run
+  through an ARMA model.
+\item
+  \texttt{Ar} {[} numeric \textbar{} empty {]} - Row vector of AR
+  coefficients; if empty, \texttt{Ar = 1}; see Description.
+\item
+  \texttt{Ma} {[} numeric \textbar{} empty {]} - Row vector of MA
+  coefficients; if empty, \texttt{Ma = 1}; see Description.
+\item
+  \texttt{Range} {[} numeric \textbar{} \texttt{@auto} {]} - Range on
+  which the input series will be constructed; if not specified or
+  \texttt{@auto}, the range will be determined based on the input time
+  series, \texttt{E}.
+\end{itemize}
+
+\paragraph{Output arguments}
+
+\begin{itemize}
+\itemsep1pt\parskip0pt\parsep0pt
+\item
+  \texttt{X} {[} tseries {]} - Output time series constructed by running
+  an ARMA model through the input series.
+\end{itemize}
+
+\paragraph{Options}
+
+\paragraph{Description}
+
+The output series is constructed as follows:
+
+\[ A(L) X_t = M(L) E_t \]
+
+where $A(L)$ and $M(L)$ are polynomials in lag operator defined by the
+vectors \texttt{Ar} and \texttt{Ma}. In other words,
+
+\begin{verbatim}
+X(t) = ( -Ar(2)*X(t-1) - Ar(3)*X(t-2) - ...
+       + Ma(1)*E(t) + Ma(2)*E(t-1) + ... ) / Ar(1);
+\end{verbatim}
+
+\paragraph{Example}
+
+Construct an AR(1) process with autoregression coefficient 0.8, based on
+normally distributed innovations.
+
+\begin{verbatim}
+E = tseries(1:20,@randn);
+X = arma(E,[1,-0.8],[]);
+\end{verbatim}
+
+
