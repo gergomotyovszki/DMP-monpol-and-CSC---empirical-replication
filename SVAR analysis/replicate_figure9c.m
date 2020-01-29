@@ -31,7 +31,6 @@ plot_irf         = 1;        % plot IRFs 0=no plot, 1=single, 2=plot overlay
 %IRF_proxy(DATASET,tstart,tend,IV,nlags,shock,baseline_var,plot_irf)
 IRF_proxysec(DATASET,tstart,tend,IV,nlags,shock,baseline_var,plot_irf)
 
-
 [~,~,~]=mkdir('charts');               % printing numerical results
 filename = ['charts\MAsector3VAR'];
 saveas(gcf,filename,'epsc');
