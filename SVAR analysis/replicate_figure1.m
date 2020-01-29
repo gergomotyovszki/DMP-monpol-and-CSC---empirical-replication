@@ -3,9 +3,10 @@
 %-------------------------------------------------
 % codes based on Proxy SVAR by Mertens and Ravn, modified by E. Pappa
 %
-rng(15); %5
+rng(15);
 clc; clear all; close all; addpath('auxfiles'); addpath('VAR_Toolbox'); addpath('proxySVAR');
 %
+
 load DATASET;
 %% Baseline VAR specification
 tstart           = 1980; 
