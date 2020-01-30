@@ -27,9 +27,12 @@ baseline_var     = {'UR','MA_EMP_S4','MA_RATIO_EMP4','MA_RWAGE_S4','MA_WPREMIUM4
 %------------------------------------------------------
 %% Select what to plot
 plot_irf         = 1;        % plot IRFs 0=no plot, 1=single, 2=plot overlay
+% Standard error method
+method           = 1;        % 1 = Bootstrap;
+
 % Baseline specification
-%IRF_proxy(DATASET,tstart,tend,IV,nlags,shock,baseline_var,plot_irf)
-IRF_proxysec(DATASET,tstart,tend,IV,nlags,shock,baseline_var,plot_irf)
+IRF_proxysec(DATASET,tstart,tend,IV,nlags,shock,baseline_var,plot_irf,method)
+
 
 
 [~,~,~]=mkdir('charts');               % printing numerical results

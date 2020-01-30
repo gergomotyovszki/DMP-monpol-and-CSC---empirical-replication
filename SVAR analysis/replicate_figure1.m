@@ -23,9 +23,12 @@ baseline_var     = {'UR','MA_EMP_S','MA_RAT_EMP','MA_RWAGE_S','MA_WPREMIUM','INF
 %------------------------------------------------------
 %% Select what to plot
 plot_irf         = 1;        % plot IRFs 0=no plot, 1=single, 2=plot overlay
+% Standard error method
+method           = 1;        % 1 = Bootstrap;
+
 % Baseline specification
 %IRF_proxy(DATASET,tstart,tend,IV,nlags,shock,baseline_var,plot_irf)
-IRF_proxy(DATASET,tstart,tend,IV,nlags,shock,baseline_var,plot_irf)
+IRF_proxy(DATASET,tstart,tend,IV,nlags,shock,baseline_var,plot_irf,method)
 
 [~,~,~]=mkdir('charts');               % printing numerical results
 filename = ['charts\MAbaselineVAR'];
