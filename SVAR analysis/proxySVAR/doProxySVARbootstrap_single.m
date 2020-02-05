@@ -18,7 +18,7 @@ function VARbs = doProxySVARbootstrap_single(VAR,nboot,clevel,DATASET)
         VARBS = VAR;
         VARBS.vars = varsb;        
         VARBS.proxies = [VAR.proxies(1:VAR.p,:); VAR.m.*(rr*ones(1,VAR.k))];
-        VARBS = doProxySVAR_single_trend(VARBS,DATASET);
+        VARBS = doProxySVAR(VARBS,DATASET);
         
         for j=1:VAR.k;
         irs = VARBS.irs(:,:,j);
