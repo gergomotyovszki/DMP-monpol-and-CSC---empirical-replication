@@ -1,4 +1,4 @@
-function VAR = doProxySVAR_single_trend(VAR,DATASET)
+function VAR = doProxySVAR(VAR,DATASET)
 
 
 %VAR=VAR1;
@@ -67,3 +67,6 @@ irs(VAR.p+1,:) = -VAR.b1(:,1)/VAR.b1(1,1);
  end
 VAR.irs = irs(VAR.p+1:end,:); 
  
+
+
+

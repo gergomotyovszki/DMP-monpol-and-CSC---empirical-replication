@@ -1,4 +1,4 @@
-function VAR = doProxySVAR_single_trend(VAR,DATASET)
+function VAR = doProxySVAR(VAR,DATASET)
 
 
 %VAR=VAR1;
