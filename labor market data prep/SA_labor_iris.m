@@ -19,8 +19,10 @@
 %% Reading the data
 
     % Reading the seasonally non-adjusted data after the Stata and R manipulations
-
+    
     NA_inputdata  = 'clean data\morg1979_2016_final.xlsx';
+        emptycellA1=' ';
+        xlswrite(NA_inputdata,emptycellA1);  % IMPORTANT! Before importing data from the xls file, you have to delete cell A1!!
     xls2csv(NA_inputdata)
     NA_input_csv  = 'clean data\morg1979_2016_final.csv';
     
@@ -80,6 +82,8 @@
     SA.employment_rate_noed_any_ind  = x12(NA.employment_rate_noed_any_ind, Inf);
     SA.hrlwage_ed_any_industry       = x12(NA.hrlwage_ed_any_industry, Inf);
     SA.hrlwage_noed_any_industry     = x12(NA.hrlwage_noed_any_industry, Inf);
+    SA.uhat_education_skilled        = x12(NA.uhat_education_skilled, Inf);
+    SA.uhat_education_unskilled      = x12(NA.uhat_education_unskilled, Inf);
 
 
     

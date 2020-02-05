@@ -4,8 +4,8 @@ set mem 500M
 capture log close
 set more off, perm
 
-
 * Set base folder and paths
+
 gl base 	"D:\project\empirical replication files\labor market data prep"  //Change this to the precise folder where the current file is located
 gl inputdata "${base}/data files"
 gl cleandata "${base}/clean data"
@@ -63,6 +63,28 @@ replace education=1 if gradeat<13 & year<1992 // edu<16 & year<1992
 replace education=2 if gradeat>=13 & year<1992 // edu>=16 & year<1992
 la define education 1 "w/o College" 2 "Some College", replace
 la val education education
+
+* Generate broad age groups
+gen age_group=2
+replace age_group=1 if age<35
+replace age_group=3 if age>55
+la define age_group 1 "Below 35" 2 "35-55" 3 "Above 55"
+la val age_group age_group
+
+* Generate collapsed races
+recode race (1 = 1 "White") (2 = 2 "Black") (else = 3 "Other"), gen(race_collapsed)
+
+* Generate indicator for married/single (there was a re-coding of marital in 1989)
+/* Marital status at time of enumeration. Until 1989 Widowed Divorced and separated were grouped, however in all years, <4 is married, otherwise single. In the original data 5 is used for Never Married until 1989. */
+recode marital (1 2 3 = 1 "Married") (else = 0 "Single"), gen(married)
+
+* Harmonize state from "state" and "stfips"
+tempvar state_string stfips_string state_combined
+sdecode state, gen(`state_string') labonly
+sdecode stfips, gen(`stfips_string') labonly
+gen `state_combined' = `state_string'
+replace `state_combined' = `stfips_string' if mi(state)
+encode `state_combined', gen(state_combined)
 
 * Generate combined year-month variable
 egen yearmonth = concat(year intmonth), punct("M")
@@ -132,7 +154,21 @@ qui forval industry = 1(1)6{
 	
 }
 
-collapse (sum) employed_* (mean) year intmonth employment_rate* share_employed_industy_* hrlwage_ed* hrlwage_noed* [pweight=earnwt], by(yearmonth)
+* Calculating fitted residuals of log hourly wage for skilled and unskilled workers
+forval g=1/2 {
+	qui reg ln_hrlwage i.age_group i.sex i.race_collapsed i.married i.state_combined if education == `g' [pweight=earnwt]
+
+	predict yhat_education`g' if e(sample), xb
+	predict uhat_education`g' if e(sample), residual
+}
+
+rename uhat_education1 uhat_education_unskilled
+rename uhat_education2 uhat_education_skilled
+
+label var uhat_education_unskilled "Fitted residuals unskilled"
+label var uhat_education_skilled "Fitted residuals skilled"
+
+collapse (sum) employed_* (mean) year intmonth employment_rate* share_employed_industy_* hrlwage_ed* hrlwage_noed* uhat_education_unskilled uhat_education_skilled [pweight=earnwt], by(yearmonth)
 sort year intmonth
 
 gen employment_ratio=employed_any_ed/employed_any_noed
@@ -142,7 +178,7 @@ qui forval industry = 1(1)6{
 
 drop year intmonth
 sencode yearmonth,replace 
-keep yearmonth employment_ratio* employment_rate* share_employed_industy_* hrlwage_*
+keep yearmonth employment_ratio* employment_rate* share_employed_industy_* hrlwage_* uhat_education_*
 
 save "${cleandata}/morg1979-2016_final.dta", replace
-export excel using "${cleandata}/morg1979_2016_final.xlsx", firstrow(variables) replace
+export excel using "${cleandata}/morg1979_2016_final.xlsx", firstrow(variables) keepcellfmt replace 
