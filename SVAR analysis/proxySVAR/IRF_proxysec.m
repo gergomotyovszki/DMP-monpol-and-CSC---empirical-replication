@@ -71,7 +71,7 @@ if VARoptions.plot_irf == 1
     if VARoptions.method == 1;
         VAR1_95                = doProxySVARbootstrap_single(VAR1,nboot,clevel,DATASET);
         VAR1_68             = doProxySVARbootstrap_single(VAR1,nboot,68,DATASET);
-        IRF_proxy_plotsec(VAR,VAR1,VAR1_95,VAR1_68,DATASET,IV)
+        f = IRF_proxy_plotsec(VAR,VAR1,VAR1_95,VAR1_68,DATASET,IV);
     
     % Delta method for standard errors
     elseif VARoptions.method == 2;

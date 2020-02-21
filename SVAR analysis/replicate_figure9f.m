@@ -31,10 +31,14 @@ plot_irf         = 1;        % plot IRFs 0=no plot, 1=single, 2=plot overlay
 method           = 1;        % 1 = Bootstrap;
 
 % Baseline specification
-IRF_proxysec(DATASET,tstart,tend,IV,nlags,shock,baseline_var,plot_irf,method)
+f= IRF_proxysec(DATASET,tstart,tend,IV,nlags,shock,baseline_var,plot_irf,method);
 
 
 
 [~,~,~]=mkdir('charts');               % printing numerical results
 filename = ['charts\MAsector6VAR'];
 saveas(gcf,filename,'epsc');
+saveas(gcf,filename,'fig');
+
+f.PaperSize = [43 15];
+saveas(f,filename,'pdf');

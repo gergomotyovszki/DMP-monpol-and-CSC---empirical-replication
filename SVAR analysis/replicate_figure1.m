@@ -28,8 +28,12 @@ method           = 1;        % 1 = Bootstrap;
 
 % Baseline specification
 %IRF_proxy(DATASET,tstart,tend,IV,nlags,shock,baseline_var,plot_irf)
-IRF_proxy(DATASET,tstart,tend,IV,nlags,shock,baseline_var,plot_irf,method)
+f = IRF_proxy(DATASET,tstart,tend,IV,nlags,shock,baseline_var,plot_irf,method);
 
 [~,~,~]=mkdir('charts');               % printing numerical results
 filename = ['charts\MAbaselineVAR'];
 saveas(gcf,filename,'epsc');
+saveas(gcf,filename,'fig');
+
+f.PaperSize = [43 29.7];
+saveas(f,filename,'pdf');

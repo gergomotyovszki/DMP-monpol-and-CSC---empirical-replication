@@ -1,5 +1,5 @@
 
-function f = IRF_proxy(DATASET,tstart,tend,IV,nlags,shock,baseline_var,plot_irf,method)
+function fig = IRF_proxy(DATASET,tstart,tend,IV,nlags,shock,baseline_var,plot_irf,method)
 
 VARoptions.plot_irf         = plot_irf;        % plot IRFs 0=no plot, 1=single, 2=plot overlay
 VARoptions.method           = method;          % 1 = Bootstrap; 
@@ -71,7 +71,7 @@ if VARoptions.plot_irf == 1
     if VARoptions.method == 1;
         VAR1_95                = doProxySVARbootstrap_single(VAR1,nboot,clevel,DATASET);
         VAR1_68             = doProxySVARbootstrap_single(VAR1,nboot,68,DATASET);
-        IRF_proxy_plot(VAR,VAR1,VAR1_95,VAR1_68,DATASET,IV)
+        fig=IRF_proxy_plot(VAR,VAR1,VAR1_95,VAR1_68,DATASET,IV);
     
     % Delta method for standard errors
     elseif VARoptions.method == 2;
