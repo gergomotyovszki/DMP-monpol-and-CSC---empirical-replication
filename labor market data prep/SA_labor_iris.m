@@ -94,5 +94,5 @@
 
     % Remove IRIS from the Matlab path
     rmpath(genpath(irisfolder));
-    irisfinish;
+    %irisfinish;
     
