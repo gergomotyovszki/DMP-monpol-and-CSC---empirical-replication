@@ -5,3 +5,7 @@ aea.bst
 datarefs.bib
 motyostyle.sty
 readme_empirical.tex
+labor market data prep/checking.mat
+labor market data prep/original.mat
+*.asv
+labor market data prep/SA_labor_iris_old.m

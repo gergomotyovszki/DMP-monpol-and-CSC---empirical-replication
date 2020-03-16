@@ -20,13 +20,20 @@
 
     % Reading the seasonally non-adjusted data after the Stata and R manipulations
     
-    NA_inputdata  = 'clean data\morg1979_2016_final.xlsx';
-        emptycellA1=' ';
-        xlswrite(NA_inputdata,emptycellA1);  % IMPORTANT! Before importing data from the xls file, you have to delete cell A1!!
-    xls2csv(NA_inputdata)
-    NA_input_csv  = 'clean data\morg1979_2016_final.csv';
+    NA_inputdata  = 'clean data/morg1979_2016_final.xlsx';
+    tbl           = readtable(NA_inputdata, "UseExcel", false);
     
-    NA = dbload(NA_input_csv);     
+    tbl.Properties.VariableNames(1) = {'Dates'};
+    dates                           = datetime(tbl.Dates,'InputFormat','uuuu''M''M');
+    datemonth                       = mm( year(dates(1)), month(dates(1)) ):mm( year(dates(end)), month(dates(end)) );
+    
+    varnames    = tbl.Properties.VariableNames;
+    varnames    = varnames(2:end);
+    
+    for vv = 1:length(varnames)
+       NA.(varnames{vv}) = tseries(datemonth, tbl.(varnames{vv}) );
+    end
+    
     
     starhist = get(NA.employment_rate_1,'start');
     
@@ -37,22 +44,20 @@
             if edu == 1 && indu == 4
                 
             else 
-                NA_inputdata_kalman = ['clean data\hrlwage_' edc{edu} '_industry_' num2str(indu) '_kalman.xlsx'];
-                xls2csv(NA_inputdata_kalman)
+                NA_inputdata_kalman = ['clean data/hrlwage_' edc{edu} '_industry_' num2str(indu) '_kalman.xlsx'];
                 
-                NA_inputdata_kalman_csv = ['clean data\hrlwage_' edc{edu} '_industry_' num2str(indu) '_kalman.csv'];
-                kal = [edc{edu} '_' num2str(indu)];
-                NA_kalman.(kal) = dbload(NA_inputdata_kalman_csv);
+                tbl_kalman      = readtable(NA_inputdata_kalman, "UseExcel", false);
+                kal             = [edc{edu} '_' num2str(indu)];
+                                
+                NA_kalman.(kal) = tseries(datemonth, tbl_kalman.x );
                 
-                hrly = ['hrlwage_' edc{edu} '_industry_' num2str(indu)];
-                NA_kalman.(kal).x = redate(NA_kalman.(kal).x, 1, starhist);
+                hrly = ['hrlwage_' edc{edu} '_industry_' num2str(indu)];                
                 NA.([hrly '_old']) = NA.(hrly);
-                NA.(hrly) = NA_kalman.(kal).x;
+                NA.(hrly) = NA_kalman.(kal);
             end
         end
     end
         
-    
     
 %% Seasonal adjustment by IRIS
 
@@ -85,12 +90,25 @@
     SA.uhat_education_skilled        = x12(NA.uhat_education_skilled, Inf);
     SA.uhat_education_unskilled      = x12(NA.uhat_education_unskilled, Inf);
 
-
+    % save('checking.mat','SA','NA');
     
+    
+    % Creating table from time series structure
+        SA_table    = struct2table(SA);
+        ff          = fieldnames(SA);
+        
+        for vv = 1:length(ff)
+            SA_table.(ff{vv}) = double( SA_table.(ff{vv}) );
+        end
+        SA_table.Dates = dat2str(datemonth)';
+        SA_table       = movevars(SA_table, 'Dates', 'Before', 1);
+        
 %% Save SA data
 
-    dbsave(SA,'clean data\SA_data_iris.csv','class=', false, 'comment=', false, 'format=','%0.8f');
-    dbsave(NA,'clean data\NA_data.csv','class=', false, 'comment=', false, 'format=','%0.8f');
+    writetable(SA_table, 'clean data/SA_data_iris.xlsx', 'UseExcel', false);
+    
+    dbsave(SA,'clean data/SA_data_iris.csv','class=', false, 'comment=', false, 'format=','%0.8f');
+    dbsave(NA,'clean data/NA_data.csv','class=', false, 'comment=', false, 'format=','%0.8f');
 
     % Remove IRIS from the Matlab path
     rmpath(genpath(irisfolder));
