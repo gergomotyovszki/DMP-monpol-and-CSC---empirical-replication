@@ -8,7 +8,7 @@
     
     % Loading IRIS Toolbox -- only needed if has not been loaded yet in the current Matlab session
         currentfolder = fileparts(which('SA_labor_iris.m'));
-        irisfolder = [currentfolder '\IRIS_Tbx_20150127'];
+        irisfolder = [currentfolder '/IRIS_Tbx_20150127'];
         addpath(genpath(irisfolder));
 
         irisstartup
